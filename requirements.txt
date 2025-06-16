@@ -1,0 +1,9 @@
+crawl4ai
+aiohttp
+beautifulsoup4
+lxml
+playwright
+markdownify
+streamlit
+pandas
+pydantic
