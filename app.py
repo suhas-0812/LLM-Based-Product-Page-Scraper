@@ -16,15 +16,12 @@ st.set_page_config(
 @st.cache_resource
 def install_playwright():
     try:
-        # First install system dependencies
-        subprocess.run([sys.executable, "-m", "playwright", "install-deps", "chromium"], 
-                      check=True, capture_output=True, text=True)
-        # Then install chromium browser
+        # Only install chromium browser (dependencies handled by packages.txt)
         subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], 
                       check=True, capture_output=True, text=True)
         return True
     except subprocess.CalledProcessError as e:
-        st.error(f"Playwright installation failed: {e.stderr}")
+        st.error(f"Playwright browser installation failed: {e.stderr}")
         return False
     except Exception as e:
         st.error(f"Unexpected error installing Playwright: {e}")
