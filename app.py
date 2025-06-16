@@ -16,10 +16,24 @@ st.set_page_config(
 @st.cache_resource
 def install_playwright():
     try:
-        subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], check=True)
+        # First try to install chromium
+        subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], 
+                      check=True, capture_output=True, text=True)
         return True
+    except subprocess.CalledProcessError as e:
+        st.warning(f"Playwright install failed: {e.stderr}")
+        try:
+            # Try installing dependencies
+            subprocess.run([sys.executable, "-m", "playwright", "install-deps", "chromium"], 
+                          check=True, capture_output=True, text=True)
+            subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], 
+                          check=True, capture_output=True, text=True)
+            return True
+        except Exception as e2:
+            st.error(f"Failed to install Playwright after retry: {e2}")
+            return False
     except Exception as e:
-        st.error(f"Failed to install Playwright: {e}")
+        st.error(f"Unexpected error installing Playwright: {e}")
         return False
 
 # Install browsers
