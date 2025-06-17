@@ -12,7 +12,7 @@ class Product(BaseModel):
     product_description: str = Field(..., description="Detailed product description")
     everything_you_need_to_know: str = Field(default="", description="Comprehensive product information and specifications")
     why_we_love_it: str = Field(default="", description="Key selling points and unique features")
-    price: str = Field(..., description="Current price of the product")
+    price: str = Field(..., description="Current price of the product in INR without any currency symbol")
     website: str = Field(default="", description="Website or platform where product is sold")
     delivery_timeline: str = Field(default="", description="Expected delivery time")
     image_links: List[str] = Field(default_factory=list, description="List of product image URLs")
