@@ -85,9 +85,13 @@ async def extract_product_data(
             extraction_type="schema",
             instruction="""Extract comprehensive product information from this product page and analyze it to fill ALL fields:
 
-            BASIC INFO: Extract product name, brand, detailed description, specifications, key selling points, price, website, delivery info.
+            BASIC INFO: Extract product name, brand, detailed description, specifications, key selling points, price (always should be in INR), website, delivery info.
+
+            PRODUCT DESCRIPTION: Extract the product description as it isfrom the page.
+
+            EVERYTHING YOU NEED TO KNOW: Specific details about the products as it is from the page.
             
-            IMAGE LINKS: Extract ALL product image URLs from the page. Look for main product images, gallery images, zoom images, and variant images. Include full URLs.
+            IMAGE LINKS: Extract ALL product image URLs from the page. Look for main product images, gallery images, zoom images, and variant images. Include full URLs. Keep all the images.
             
             DEMOGRAPHICS: Determine target gender, age range (if for kids), price bracket (Budget/Mid-range/Premium/Luxury), and available cities.
             
